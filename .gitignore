@@ -7,6 +7,5 @@ target
 .classpath
 .project
 build.sbt
-code
 !*.scala
 !*.java
