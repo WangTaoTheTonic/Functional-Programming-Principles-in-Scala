@@ -240,22 +240,17 @@ object GoogleVsApple {
   
   val allData = TweetReader.allTweets
 
+  private def collectWords(list: List[String], ts: TweetSet): TweetSet =
+    if(0 == list.size) ts else collectWords(list.tail, ts.union(allData.filter(tw => tw.text.contains(list.head))))
+  
   lazy val googleTweets: TweetSet = 
   {
-    var ans: TweetSet = new Empty
-    for(str <- google)
-    {
-      ans = ans.union(allData.filter(tw => tw.text.contains(str)))
-    }
-    ans
+    collectWords(google, new Empty)
   }
   
   lazy val appleTweets: TweetSet = 
   {
-    var ans: TweetSet = new Empty
-    for(str <- apple)
-      ans = ans.union(allData.filter(tw => tw.text.contains(str)))
-    ans
+    collectWords(apple, new Empty)
   }
 
   /**
