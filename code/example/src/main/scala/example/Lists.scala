@@ -24,10 +24,12 @@ object Lists {
    * @return The sum of all elements in `xs`
    */
   def sum(xs: List[Int]): Int = {
-    var ans: Int = 0;
-    for(element <- xs)
-      ans += element;
-    ans;
+    sumAcc(0, xs)
+  }
+  
+  def sumAcc(ans: Int, xs: List[Int]): Int =
+  {
+    if(!xs.isEmpty) sumAcc(ans + xs.head, xs.tail) else ans
   }
 
   /**
@@ -46,10 +48,11 @@ object Lists {
   def max(xs: List[Int]): Int = {
     if(xs.isEmpty)
       throw new NoSuchElementException;
-    var max: Int = xs(0);
-    for(element <- xs)
-      if(element > max)
-        max = element
-    max;
+    maxAcc(Int.MinValue, xs)
+  }
+  
+  def maxAcc(max: Int, xs: List[Int]): Int =
+  {
+    if(!xs.isEmpty) maxAcc(Math.max(max, xs.head), xs.tail) else max
   }
 }
