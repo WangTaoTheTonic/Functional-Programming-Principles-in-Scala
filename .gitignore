@@ -1,4 +1,5 @@
 .settings
+*.class
 lib_managed
 project
 submission
